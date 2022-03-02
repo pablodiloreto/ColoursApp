@@ -30,9 +30,9 @@ jobs:
     - name: 📂 Deploy ColoursAPI FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        server: ftps://ftp.puertotec.com
+        server: ftp.puertotec.com
         username: ${{ secrets.aprenderit_ftpuser }}
         password: ${{ secrets.aprenderit_ftppassword }}
-        protocol: ftps
+        protocol: ftp
         local-dir: ./src/ColoursAPI/output/
         server-dir: /recursosit_ftp/coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
