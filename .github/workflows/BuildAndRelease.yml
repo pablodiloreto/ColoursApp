@@ -7,27 +7,26 @@ on:
     branches: [ main ]
 
 jobs:
-  build-coloursapi:
+  coloursapi:
     name: 🔨 Build ColoursAPI
     runs-on: windows-latest
     env:
       working-directory-coloursapi: ./src/ColoursAPI/
-      working-directory-coloursweb: ./src/ColoursWeb/
 
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
-    - name: 📀 Setup .NET
+    - name: 💾 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: 📀 Restore dependencies
+    - name: 💽 Restore dependencies
       run: dotnet restore
       working-directory: ${{env.working-directory-coloursapi}}
-    - name: 📀 Build
+    - name: 🥁 Build
       run: dotnet publish -o ./output --runtime win-x64 --self-contained
       working-directory: ${{env.working-directory-coloursapi}}
-    - name: 📂 Deploy ColoursAPI FTP
+    - name: 🌐 Deploy ColoursAPI FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ftp.puertotec.com
@@ -36,3 +35,32 @@ jobs:
         protocol: ftp
         local-dir: ./src/ColoursAPI/output/
         server-dir: /recursosit_ftp/coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
+
+  coloursweb:
+    name: 🔨 Build ColoursWeb
+    runs-on: windows-latest
+    env:
+      working-directory-coloursweb: ./src/ColoursWeb/
+
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    - name: 💾 Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: 💽 Restore dependencies
+      run: dotnet restore
+      working-directory: ${{env.working-directory-coloursweb}}
+    - name: 🥁 Build
+      run: dotnet publish -o ./output --runtime win-x64 --self-contained
+      working-directory: ${{env.working-directory-coloursweb}}
+    - name: 🌐 Deploy ColoursAPI FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ftp.puertotec.com
+        username: ${{ secrets.aprenderit_ftpuser }}
+        password: ${{ secrets.aprenderit_ftppassword }}
+        protocol: ftp
+        local-dir: ./src/ColoursWeb/output/
+        server-dir: /recursosit_ftp/coloursweb.app.aprender.it_yXS1J2qA/wwwroot/
