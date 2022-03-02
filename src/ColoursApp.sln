@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoursAPI", "ColoursAPI\ColoursAPI.csproj", "{D38576D4-3735-47CD-B3B0-84B2E89F884F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoursWeb", "ColoursWeb\ColoursWeb.csproj", "{6B1AD69E-F603-4134-BABE-20DF612B8973}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D38576D4-3735-47CD-B3B0-84B2E89F884F} = {D38576D4-3735-47CD-B3B0-84B2E89F884F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
