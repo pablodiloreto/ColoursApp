@@ -1,7 +1,7 @@
-# ColourWeb
+# ColoursWeb
 
-![](docs/imgColourWeb1.png)
+¡Gracias por tu interés en este proyecto! El mismo es parte de [ColoursApp](README.md). Desarrollado por [AprenderIT](https://aprender.it) en base a la creación de Mark Harrison (https://github.com/markharrison/Lab_APIM_Original).
 
-Updated to .NET 5.0
+Web para utilizar con ColoursAPI.
 
-Also see: <https://github.com/markharrison/ColoursAPI>
+![example workflow](https://github.com/AprenderIT/ColoursApp/actions/workflows/main.yml/badge.svg)

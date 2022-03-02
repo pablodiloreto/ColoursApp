@@ -24,7 +24,7 @@ namespace ColourWeb.Pages
             }
             else
             {
-                APIUrl = "https://coloursapi.azurewebsites.net/colours/random";
+                APIUrl = "https://coloursapi.app.aprender.it/colours/random";
                 APIMode = true;
             }
                 
