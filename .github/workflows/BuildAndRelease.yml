@@ -17,24 +17,22 @@ jobs:
     steps:
     - name: 🚚 Get latest code
       uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: 📀 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
+    - name: 📀 Restore dependencies
       run: dotnet restore
       working-directory: ${{env.working-directory-coloursapi}}
-    - name: Build
+    - name: 📀 Build
       run: dotnet build --configuration Release --no-restore
       working-directory: ${{env.working-directory-coloursapi}}
-
-  deploy:
-    name: 📂 Sync files
-    uses: SamKirkland/FTP-Deploy-Action@4.3.0
-    with:
-      server: ftp.puertotec.com
-      username: ${{ secrets.aprenderit_ftpuser }}
-      password: ${{ secrets.aprenderit_ftppassword }}
-      protocol: ftps
-      local-dir: ./dist/
-      server-dir: /coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
+    - name: 📂 Deploy ColoursAPI
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ftp.puertotec.com
+        username: ${{ secrets.aprenderit_ftpuser }}
+        password: ${{ secrets.aprenderit_ftppassword }}
+        protocol: ftps
+        local-dir: ./dist/
+        server-dir: /coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
