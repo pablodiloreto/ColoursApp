@@ -27,7 +27,7 @@ jobs:
     - name: 📀 Build
       run: dotnet publish -o ./output --runtime win-x64 --self-contained
       working-directory: ${{env.working-directory-coloursapi}}
-    - name: 📂 Deploy ColoursAPI
+    - name: 📂 Deploy ColoursAPI FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
         server: ftp.puertotec.com
