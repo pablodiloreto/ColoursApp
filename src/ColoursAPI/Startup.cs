@@ -33,20 +33,20 @@ namespace ColoursAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Mark Harrison Colours API",
+                    Title = "ColoursAPI",
                     Version = "v1",
-                    Description = "Colours API",
-                    TermsOfService = new Uri("https://github.com/markharrison"),
+                    Description = "Grupo de operaciones de la aplicación ColoursApp. Aplicación con fines educativos de AprenderIT, que unifica y extiende las funcionalidades originalmente creadas por Mark Harrison (https://github.com/markharrison/ColourAPI/ y https://github.com/markharrison/ColoursWeb)",
+                    TermsOfService = new Uri("https://github.com/AprenderIT/ColoursApp"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Mark Harrison",
-                        Email = "mark.coloursapi@harrison.ws",
-                        Url = new Uri("https://github.com/markharrison"),
+                        Name = "Pablo Di Loreto",
+                        Email = "pdiloreto@aprender.it",
+                        Url = new Uri("https://aprender.it"),
                     },
                     License = new OpenApiLicense
                     {
                         Name = "Use under MIT License",
-                        Url = new Uri("https://github.com/markharrison/ColourAPI/blob/master/LICENSE"),
+                        Url = new Uri("https://github.com/AprenderIT/ColoursApp/blob/main/LICENSE"),
                     }
                 }
                 );
@@ -81,7 +81,7 @@ namespace ColoursAPI
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mark Harrison Colours API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColoursAPI v1");
                 c.RoutePrefix = string.Empty;
             });
 
