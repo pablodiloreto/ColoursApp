@@ -13,7 +13,7 @@ on:
 jobs:
   coloursapi:
     if: github.event.pull_request.merged == true  
-    name: 🔨 Build & Release ColoursAPI
+    name: 🔨 ColoursAPI
     runs-on: windows-latest
     env:
       working-directory-coloursapi: ./src/ColoursAPI/
@@ -43,7 +43,7 @@ jobs:
 
   coloursweb:
     needs: coloursapi
-    name: 🔨 Build  & Release ColoursWeb
+    name: 🔨 ColoursWeb
     runs-on: windows-latest
     env:
       working-directory-coloursweb: ./src/ColoursWeb/
