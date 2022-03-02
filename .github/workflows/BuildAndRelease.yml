@@ -25,7 +25,7 @@ jobs:
       run: dotnet restore
       working-directory: ${{env.working-directory-coloursapi}}
     - name: 📀 Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet publish -o ./output --runtime win-x64 --self-contained
       working-directory: ${{env.working-directory-coloursapi}}
     - name: 📂 Deploy ColoursAPI
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
@@ -34,5 +34,5 @@ jobs:
         username: ${{ secrets.aprenderit_ftpuser }}
         password: ${{ secrets.aprenderit_ftppassword }}
         protocol: ftps
-        local-dir: ./src/ColoursAPI/
+        local-dir: ./src/ColoursAPI/output/
         server-dir: /coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
