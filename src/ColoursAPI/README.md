@@ -1,11 +1,7 @@
-# ColourAPI
+# ColoursAPI
 
-![](docs/imgColourAPI1.png)
+¡Gracias por tu interés en este proyecto! El mismo es parte de [ColoursApp](README.md). Desarrollado por [AprenderIT](https://aprender.it) en base a la creación de Mark Harrison (https://github.com/markharrison/Lab_APIM_Original).
 
-Updated to .NET 5.0
+API para utilizar con ColoursWeb.
 
-Also see: <https://github.com/markharrison/ColoursWeb>
-
-![WebApp Deploy](https://github.com/markharrison/ColoursAPI/workflows/WebApp%20Deploy/badge.svg?event=workflow_dispatch)
-
-![Container - Build & Push](https://github.com/markharrison/ColoursAPI/workflows/Container%20-%20Build%20&%20Push/badge.svg?event=workflow_dispatch)
+![example workflow](https://github.com/AprenderIT/ColoursApp/actions/workflows/main.yml/badge.svg)
