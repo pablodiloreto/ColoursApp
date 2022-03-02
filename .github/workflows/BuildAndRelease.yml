@@ -35,4 +35,4 @@ jobs:
         password: ${{ secrets.aprenderit_ftppassword }}
         protocol: ftps
         local-dir: ./src/ColoursAPI/output/
-        server-dir: /coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
+        server-dir: ./recursosit_ftp/coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
