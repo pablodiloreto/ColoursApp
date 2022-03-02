@@ -7,10 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    name: 🔨 Build Projects
-
+  build-coloursapi:
+    name: 🔨 Build ColoursAPI
     runs-on: windows-latest
+    env:
+      working-directory-coloursapi: ./src/ColoursAPI/
+      working-directory-coloursweb: ./src/ColoursWeb/
 
     steps:
     - name: 🚚 Get latest code
@@ -21,6 +23,8 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
+      working-directory: ${{env.working-directory-coloursapi}}
     - name: Build
-      run: dotnet build ColoursAPI --configuration Release --no-restore
+      run: dotnet build --configuration Release --no-restore
+      working-directory: ${{env.working-directory-coloursapi}}
 
