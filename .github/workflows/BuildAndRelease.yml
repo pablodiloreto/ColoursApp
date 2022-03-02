@@ -34,5 +34,5 @@ jobs:
         username: ${{ secrets.aprenderit_ftpuser }}
         password: ${{ secrets.aprenderit_ftppassword }}
         protocol: ftps
-        local-dir: ./dist/
+        local-dir: ./src/ColoursAPI/
         server-dir: /coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
