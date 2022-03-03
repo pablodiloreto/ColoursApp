@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ColoursAPI.Services;
 using ColoursAPI.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ColoursAPI.Controllers
 {
@@ -46,6 +47,7 @@ namespace ColoursAPI.Controllers
         )]
         [SwaggerResponse(StatusCodes.Status201Created, "Success - colours updated/created", typeof(ColoursItem))]
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Unprocessable Entity", typeof(ProblemDetails))]
+        [Authorize]
         public async Task<IActionResult> UpdateAsync(
             [FromBody, SwaggerRequestBody("Colours to update", Required = true)] List<ColoursItem> coloursItems)
         {
@@ -76,6 +78,7 @@ namespace ColoursAPI.Controllers
             Tags = new[] { "Colours" }
         )]
         [SwaggerResponse(StatusCodes.Status204NoContent, "Success - all colours deleted", typeof(ColoursItem))]
+        [Authorize]
         public async Task<IActionResult> DeleteAllAsync()
         {
 
@@ -120,6 +123,7 @@ namespace ColoursAPI.Controllers
         )]
         [SwaggerResponse(StatusCodes.Status201Created, "Success - colour created/updated", typeof(ColoursItem))]
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Unprocessable Entity", typeof(ProblemDetails))]
+        [Authorize]
         public async Task<IActionResult> UpdateByIdAsync(
                     [FromRoute, SwaggerParameter("Id of Colour to update", Required = true)] int colourId,
                     [FromBody, SwaggerRequestBody("Colours to update", Required = true)] ColoursItem coloursItemUpdate)
@@ -152,6 +156,7 @@ namespace ColoursAPI.Controllers
         )]
         [SwaggerResponse(StatusCodes.Status204NoContent, "Success - colour deleted", typeof(ColoursItem))]
         [SwaggerResponse(StatusCodes.Status422UnprocessableEntity, "Unprocessable Entity", typeof(ProblemDetails))]
+        [Authorize]
         public async Task<IActionResult> DeleteByIdAsync(
             [FromRoute, SwaggerParameter("Id of Colour to delete", Required = true)] int colourId)
         {
@@ -204,7 +209,7 @@ namespace ColoursAPI.Controllers
             List<ColoursItem> _ColoursList = await _ColoursService.GetAll();
             if (_ColoursList.Count == 0)
             {
-                return NotFound(new ProblemDetails { Status = 404, Title = "Not Found - no colors exist"});
+                return NotFound(new ProblemDetails { Status = 404, Title = "Not Found - no colors exist" });
             }
 
             Random rnd = new Random();
@@ -222,6 +227,7 @@ namespace ColoursAPI.Controllers
             Tags = new[] { "Colours" }
         )]
         [SwaggerResponse(StatusCodes.Status201Created, "Success - colours reset", typeof(ColoursItem))]
+        [Authorize]
         public async Task<IActionResult> ResetAsync()
         {
 

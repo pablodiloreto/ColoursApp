@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ColoursAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace ColoursAPI
 {
@@ -29,6 +30,24 @@ namespace ColoursAPI
             services.AddSingleton<ColoursService>(new ColoursService(Configuration));
             services.AddControllers();
             services.AddCors();
+
+            services.AddAuthorization();
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = Configuration.GetValue<string>("Authentication:Issuer");
+                    options.RequireHttpsMetadata = true;
+                    options.Audience = Configuration.GetValue<string>("Authentication:Audience");
+                 
+                    options.TokenValidationParameters.ValidateAudience = false;
+                });
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
@@ -50,6 +69,28 @@ namespace ColoursAPI
                     }
                 }
                 );
+
+                var securityScheme = new OpenApiSecurityScheme
+                {
+                    Name = "JWT Authentication",
+                    Description = "Enter JWT Bearer token **_only_**",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "bearer", // must be lower case
+                    BearerFormat = "JWT",
+                    Reference = new OpenApiReference
+                    {
+                        Id = JwtBearerDefaults.AuthenticationScheme,
+                        Type = ReferenceType.SecurityScheme
+                    }
+                };
+
+                c.AddSecurityDefinition(JwtBearerDefaults.AuthenticationScheme, securityScheme);
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {securityScheme, new string[] { }}
+                });
+
 
                 c.EnableAnnotations();
 
@@ -73,7 +114,7 @@ namespace ColoursAPI
             }
 
             app.UseCors(builder =>
-              builder.WithOrigins("http://localhost")
+              builder
                       .AllowAnyOrigin()
                       .AllowAnyHeader()
                       .AllowAnyMethod());
@@ -82,11 +123,11 @@ namespace ColoursAPI
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ColoursAPI v1");
-                c.RoutePrefix = string.Empty;
             });
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

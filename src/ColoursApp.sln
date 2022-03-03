@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoursWeb", "ColoursWeb\Co
 		{D38576D4-3735-47CD-B3B0-84B2E89F884F} = {D38576D4-3735-47CD-B3B0-84B2E89F884F}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ColoursIdentityServer", "ColoursIdentityServer\ColoursIdentityServer.csproj", "{1E5A56B1-EA15-4C32-A9C4-000F15C81B05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{6B1AD69E-F603-4134-BABE-20DF612B8973}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B1AD69E-F603-4134-BABE-20DF612B8973}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B1AD69E-F603-4134-BABE-20DF612B8973}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E5A56B1-EA15-4C32-A9C4-000F15C81B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E5A56B1-EA15-4C32-A9C4-000F15C81B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E5A56B1-EA15-4C32-A9C4-000F15C81B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E5A56B1-EA15-4C32-A9C4-000F15C81B05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

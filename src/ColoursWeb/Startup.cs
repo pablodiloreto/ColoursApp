@@ -1,13 +1,13 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Net.Http;
 
 namespace ColoursWeb
 {
@@ -24,6 +24,49 @@ namespace ColoursWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+            services.AddTransient(sp =>
+            {
+                HttpClient httpClient = new HttpClient();
+
+                var httpContext = sp.GetService<HttpContext>();
+                if (httpContext is not null)
+                {
+                    var accessToken = httpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
+
+                    if (!string.IsNullOrWhiteSpace(accessToken))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accessToken);
+                    }
+                }
+
+                return httpClient;
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = Configuration.GetValue<string>("Authentication:Issuer");
+
+                options.ClientId = "web";
+                options.ClientSecret = Configuration.GetValue<string>("Authentication:Secret");
+                options.ResponseType = "code";
+
+                options.SaveTokens = true;
+
+                options.Scope.Clear();
+                options.Scope.Add("openid");
+                options.Scope.Add("profile");
+                options.Scope.Add("offline_access");
+                options.Scope.Add("api1");
+
+                options.GetClaimsFromUserInfoEndpoint = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +85,8 @@ namespace ColoursWeb
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

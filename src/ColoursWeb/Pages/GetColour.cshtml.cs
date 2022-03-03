@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Text.Json;
+
+using System;
 using System.Net.Http;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ColoursWeb.Pages
 {
@@ -25,9 +22,16 @@ namespace ColoursWeb.Pages
         public string strResponse;
         public int iStatusCode = 200;
 
+        private readonly HttpClient _httpClient;
+
+        public GetColourModel(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
         public static async Task<string> OnGetPink()
         {
-            string[] strColors = { "pink", "hotpink", "deeppink", "fuchsia","mediumvioletred" };
+            string[] strColors = { "pink", "hotpink", "deeppink", "fuchsia", "mediumvioletred" };
             Random r = new Random();
             int rInt = r.Next(strColors.Length);
 
@@ -44,20 +48,16 @@ namespace ColoursWeb.Pages
 
         }
 
-        public static async Task<string> OnGetRelay(string vURL)
+        public async Task<string> OnGetRelay(string vURL)
         {
-
-            await Task.Run(() => { });
 
             try
             {
-                HttpClient client = new HttpClient();
-
-                var msg = client.GetStringAsync(vURL).Result;
+                var msg = await _httpClient.GetStringAsync(vURL);
 
                 return msg;
             }
-            catch( Exception ex)
+            catch (Exception ex)
             {
                 ProblemDetails res = new ProblemDetails { Status = 500, Title = ex.Message };
 
@@ -78,15 +78,14 @@ namespace ColoursWeb.Pages
             {
                 try
                 {
-                    HttpClient client = new HttpClient();
-                    strResponse = client.GetStringAsync(vURL).Result;
+                    strResponse = await _httpClient.GetStringAsync(vURL);
 
                 }
                 catch (Exception ex)
                 {
                     iStatusCode = 500;
                     ProblemDetails res = new ProblemDetails { Status = 500, Title = ex.Message };
-                    strResponse =  JsonSerializer.Serialize(res, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true });
+                    strResponse = JsonSerializer.Serialize(res, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, WriteIndented = true });
                 }
             }
         }
