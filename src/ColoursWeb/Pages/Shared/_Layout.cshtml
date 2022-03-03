@@ -29,9 +29,22 @@
         <div class="navtext">
             <span class='naviconlink' onclick='window.open("/", "_self"); return false;'><i class='fa fa-home fa-lg fa-fw'></i>Home</span><br />
         </div>
-        <div class="navtext">
-            <span class='naviconlink' onclick='window.open("/login", "_self"); return false;'><i class='fa fa-sign-in fa-lg fa-fw'></i>Iniciar sesion</span><br />
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="navtext">
+                <span class='naviconlink' onclick='window.open("/singout", "_self"); return false;'><i class='fa fa-sign-out fa-lg fa-fw'></i>Cerrar sesion</span><br />
+            </div>
+            <div class="navtext">
+                <span class='naviconlink' onclick='window.open("/account", "_self"); return false;'><i class='fa fa-user fa-lg fa-fw'></i>Perfil</span><br />
+            </div>
+        }
+        else
+        {
+            <div class="navtext">
+                <span class='naviconlink' onclick='window.open("/singin", "_self"); return false;'><i class='fa fa-sign-in fa-lg fa-fw'></i>Iniciar sesion</span><br />
+            </div>
+        }
+
         <div class="navtext">
             <span class='naviconlink' onclick='window.open("/config", "_self"); return false;'><i class='fa fa-edit fa-lg fa-fw'></i>Configuraciones</span><br />
         </div>
@@ -45,9 +58,9 @@
             <span class='naviconlink' onclick='window.open("https://aprender.it", "_blank"); return false;'><i class='fa fa-book fa-lg fa-fw'></i>Sitio Aprender.IT</span><br />
         </div>
 
-    <br />
-    <div class="sidetext">Esta aplicacion se proporciona "tal cual", sin garantias y no confiere ningun derecho.</div>
-    <br />
+        <br />
+        <div class="sidetext">Esta aplicacion se proporciona "tal cual", sin garantias y no confiere ningun derecho.</div>
+        <br />
     </div>
 
     <div id="idnavoverlay" onclick="toggleNav();"></div>
