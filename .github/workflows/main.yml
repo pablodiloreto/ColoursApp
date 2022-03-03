@@ -73,6 +73,7 @@ jobs:
         
         
   coloursIdentityServer:
+    needs: coloursweb
     name: 🔨 Identity Server 
     runs-on: windows-latest
     env:
