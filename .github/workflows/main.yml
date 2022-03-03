@@ -70,3 +70,33 @@ jobs:
         protocol: ftp
         local-dir: ./src/ColoursWeb/output/
         server-dir: /recursosit_ftp/coloursweb.app.aprender.it_yXS1J2qA/wwwroot/
+        
+        
+  coloursIdentityServer:
+    name: 🔨 Identity Server 
+    runs-on: windows-latest
+    env:
+      working-directory-coloursids: ./src/ColoursIdentityServer/
+
+    steps:
+    - name: 🚚 Get latest code for ColoursIdentityServer
+      uses: actions/checkout@v2
+    - name: 💾 Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: 💽 Restore dependencies for ColoursIdentityServer
+      run: dotnet restore
+      working-directory: ${{env.working-directory-coloursids}}
+    - name: 🥁 Build
+      run: dotnet publish -o ./output --runtime win-x64 --self-contained
+      working-directory: ${{env.working-directory-coloursids}}
+    - name: 🌐 Deploy ColoursWeb throught FTP
+      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+      with:
+        server: ftp.puertotec.com
+        username: ${{ secrets.aprenderit_ftpuser }}
+        password: ${{ secrets.aprenderit_ftppassword }}
+        protocol: ftp
+        local-dir: ./src/ColoursIdentityServer/output/
+        server-dir: /recursosit_ftp/coloursids.app.aprender.it_8cya7WHw/wwwroot/
