@@ -25,14 +25,16 @@ namespace ColoursWeb
         {
             services.AddRazorPages();
 
+            services.AddHttpContextAccessor();
+
             services.AddTransient(sp =>
             {
                 HttpClient httpClient = new HttpClient();
 
-                var httpContext = sp.GetService<HttpContext>();
+                var httpContext = sp.GetService<IHttpContextAccessor>();
                 if (httpContext is not null)
                 {
-                    var accessToken = httpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
+                    var accessToken = httpContext.HttpContext.GetTokenAsync("access_token").GetAwaiter().GetResult();
 
                     if (!string.IsNullOrWhiteSpace(accessToken))
                     {
