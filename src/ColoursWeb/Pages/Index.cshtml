@@ -24,14 +24,14 @@
             <input type="hidden" id="colours" value=@Model.Colors />
         }*@
         <button class="btn btn-primary" id="idButStart" onclick="doStart(); return false;">Iniciar</button>
-        <button class="btn btn-secundary" id="idButReset" style="display:none;" onclick="window.location.href='/'; return false;">Resetear</button>
+        <button class="btn btn-danger" id="idButReset" style="display:none;"  onclick="window.location.href='/'; return false;">Resetear</button>
     </div>
 
     <hr style="border-top: 2px solid black" />
 
     <p>Sobre el juego: &nbsp;&nbsp;<span id="idErrorText" style="color: red;"></span></p>
     <ul>
-        <li>API: @Model.Api</li>
+        <li>API: <span id="idAPIUrl"</span></li>
         <li>Detalles: cuando inicias el juego, se realizará una llamada a la API configurada para solicitar un color aleatorio. Si la operación es exitosa, se rellenará ese color en un lugar aleatorio del panel superior.</li>
     </ul>
 

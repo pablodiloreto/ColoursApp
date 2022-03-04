@@ -54,6 +54,29 @@ public static class Config
                     IdentityServerConstants.StandardScopes.Profile,
                     "api1",
                 }
-            }
+            },
+            new Client
+            {
+                ClientId = "apim",
+                ClientSecrets = { new Secret("secret".Sha256()) },
+
+                AllowedGrantTypes = GrantTypes.Code,
+                // where to redirect to after login
+                RedirectUris = { "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/code/callback/ids2", "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/implicit/callback" },
+
+                // where to redirect to after logout
+                PostLogoutRedirectUris = { "https://localhost:44382/signout-callback-oidc", "https://coloursweb.app.aprender.it/signout-callback-oidc" },
+
+
+                AllowOfflineAccess = true,
+
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "api1",
+                }
+            },
+
         };
 }
