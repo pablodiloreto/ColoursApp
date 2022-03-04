@@ -46,7 +46,6 @@ jobs:
         server-dir: /recursosit_ftp/coloursapi.app.aprender.it_a0tfDHlR/wwwroot/
 
   coloursweb:
-    needs: coloursapi
     name: 🔨 ColoursWeb
     runs-on: windows-latest
     env:
@@ -77,7 +76,6 @@ jobs:
         
         
   coloursIdentityServer:
-    needs: coloursweb
     name: 🔨 Identity Server 
     runs-on: windows-latest
     env:

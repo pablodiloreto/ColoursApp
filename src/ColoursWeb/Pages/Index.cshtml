@@ -14,7 +14,7 @@
     <div id="idBalls"></div>
 
     <div style="margin-top: 10px;">
-        @if (Model.Direct)
+        @*@if (!Model.Direct)
         {
             <button class="btn btn-primary" id="idButStart" onclick="doStart(); return false;">Iniciar</button>
         }
@@ -22,8 +22,8 @@
         {
             <a class="btn btn-primary" id="idButStart" asp-page="Index" asp-page-handler="OnClick"> Iniciar </a>
             <input type="hidden" id="colours" value=@Model.Colors />
-        }
-
+        }*@
+        <button class="btn btn-primary" id="idButStart" onclick="doStart(); return false;">Iniciar</button>
         <button class="btn btn-secundary" id="idButReset" style="display:none;" onclick="window.location.href='/'; return false;">Resetear</button>
     </div>
 

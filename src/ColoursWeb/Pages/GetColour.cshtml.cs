@@ -1,10 +1,13 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-
-using System;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
+using System.Net.Http;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace ColoursWeb.Pages
 {
@@ -21,13 +24,6 @@ namespace ColoursWeb.Pages
     {
         public string strResponse;
         public int iStatusCode = 200;
-
-        private readonly HttpClient _httpClient;
-
-        public GetColourModel(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-        }
 
         public static async Task<string> OnGetPink()
         {
@@ -48,12 +44,16 @@ namespace ColoursWeb.Pages
 
         }
 
-        public async Task<string> OnGetRelay(string vURL)
+        public static async Task<string> OnGetRelay(string vURL)
         {
+
+            await Task.Run(() => { });
 
             try
             {
-                var msg = await _httpClient.GetStringAsync(vURL);
+                HttpClient client = new HttpClient();
+
+                var msg = client.GetStringAsync(vURL).Result;
 
                 return msg;
             }
@@ -78,7 +78,8 @@ namespace ColoursWeb.Pages
             {
                 try
                 {
-                    strResponse = await _httpClient.GetStringAsync(vURL);
+                    HttpClient client = new HttpClient();
+                    strResponse = client.GetStringAsync(vURL).Result;
 
                 }
                 catch (Exception ex)
