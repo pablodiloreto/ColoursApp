@@ -62,7 +62,7 @@ public static class Config
 
                 AllowedGrantTypes = GrantTypes.Code,
                 // where to redirect to after login
-                RedirectUris = { "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/code/callback/ids2", "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/implicit/callback" },
+                RedirectUris = { "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/code/callback/ids", "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/implicit/callback" },
 
                 // where to redirect to after logout
                 PostLogoutRedirectUris = { "https://localhost:44382/signout-callback-oidc", "https://coloursweb.app.aprender.it/signout-callback-oidc" },
