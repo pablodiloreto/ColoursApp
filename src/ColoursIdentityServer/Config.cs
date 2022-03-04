@@ -60,13 +60,14 @@ public static class Config
                 ClientId = "apim",
                 ClientSecrets = { new Secret("secret".Sha256()) },
 
-                AllowedGrantTypes = GrantTypes.Code,
+                AllowedGrantTypes = GrantTypes.Implicit,
                 // where to redirect to after login
                 RedirectUris = { "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/code/callback/ids", "https://am101a-pdiloreto-apim.developer.azure-api.net/signin-oauth/implicit/callback" },
 
                 // where to redirect to after logout
                 PostLogoutRedirectUris = { "https://localhost:44382/signout-callback-oidc", "https://coloursweb.app.aprender.it/signout-callback-oidc" },
 
+                
 
                 AllowOfflineAccess = true,
 
